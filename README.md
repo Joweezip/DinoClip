@@ -3,7 +3,7 @@
 **DinoClip** is a minimalist, open-source clipboard manager for macOS. Built with Swift and SwiftUI, it’s designed to be lightweight, secure, and respectful of your privacy.
 
 <p align="center">
-  <img src="https://your-image-link-here.png" width="400" alt="DinoClip UI">
+  <img src="https://github.com/Joweezip/DinoClip/blob/main/Resources/Icon.png" width="400" alt="DinoClip UI">
 </p>
 
 ### ✨ Features

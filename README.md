@@ -23,5 +23,14 @@
 - **Frameworks:** SwiftUI, AppKit
 - **Distribution:** Portable .dmg
 
+## ⚠️ "DinoClip is damaged" Error?
+If you see a message saying DinoClip is damaged, don't worry! This is a security feature of macOS for apps not downloaded from the App Store.
+
+**To fix it:**
+1. Move DinoClip to your **Applications** folder.
+2. Open **Terminal** and paste this command:
+   `sudo xattr -rd com.apple.quarantine /Applications/DinoClip.app`
+3. Hit Enter, type your password, and DinoClip will now open perfectly!
+
 ### 📄 License
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. We believe in keeping software free and open for everyone. See the [LICENSE](LICENSE) file for details.

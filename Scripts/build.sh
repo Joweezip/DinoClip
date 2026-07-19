@@ -1,27 +1,21 @@
 #!/bin/bash
 
-# 1. Kill old app
+# 1. Cleanup
 pkill DinoClip || true
+rm -rf DinoClip.app DinoClip.dmg
 
 # 2. Compile
 swiftc -O main.swift -o DinoClip -framework SwiftUI -framework AppKit
 
-# 3. Clean and Create Structure
-rm -rf DinoClip.app
+# 3. Structure
 mkdir -p DinoClip.app/Contents/MacOS
 mkdir -p DinoClip.app/Contents/Resources
 
-# 4. Move Binary
+# 4. Move Binary & Icon
 mv DinoClip DinoClip.app/Contents/MacOS/
+cp Resources/icon.icns DinoClip.app/Contents/Resources/AppIcon.icns
 
-# 5. ICON FIX: Look for Icon.png or icon.png and force it to be icon.png in resources
-if [ -f "Icon.png" ]; then
-    cp Icon.png DinoClip.app/Contents/Resources/icon.png
-elif [ -f "icon.png" ]; then
-    cp icon.png DinoClip.app/Contents/Resources/icon.png
-fi
-
-# 6. Create Info.plist
+# 5. Updated Info.plist (Telling macOS about the icon)
 cat <<EOF > DinoClip.app/Contents/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -29,22 +23,30 @@ cat <<EOF > DinoClip.app/Contents/Info.plist
 <dict>
     <key>CFBundleExecutable</key>
     <string>DinoClip</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon.icns</string>
     <key>CFBundleIdentifier</key>
     <string>com.dinoclip.app</string>
     <key>CFBundleName</key>
     <string>DinoClip</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
     <key>LSUIElement</key>
     <true/>
 </dict>
 </plist>
 EOF
 
-# 7. Create DMG
+# 6. Create the DMG with a Volume Icon
 mkdir -p dist
 cp -R DinoClip.app dist/
+ln -s /Applications dist/Applications
+
+# This makes the "Disk" icon look like your Dino when mounted
+cp Resources/icon.icns dist/.VolumeIcon.icns
+python3 -c "import Foundation; Foundation.NSWorkspace.sharedWorkspace().setIcon_forFile_options_(Foundation.NSImage.alloc().initWithContentsOfFile_('Resources/icon.icns'), 'dist', 0)"
+
 hdiutil create -volname "DinoClip" -srcfolder dist -ov -format UDZO DinoClip.dmg
 rm -rf dist
 
-# 8. Open
-open DinoClip.app
-echo "✅ DinoClip is now built with the internal icon!"
+echo "✅ DinoClip v1.0 is ready with Pro Icons!"

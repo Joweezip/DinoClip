@@ -14,7 +14,7 @@
 - **Open Source:** Transparent code for total trust.
 
 ### 🚀 Installation
-1. Download the latest `DinoClip.dmg` from the [Releases](https://github.com/YOUR_USERNAME/DinoClip/releases) page.
+1. Download the latest `DinoClip.dmg` from the [Releases](https://github.com/Joweezip/DinoClip/releases) page.
 2. Open the DMG and drag **DinoClip** to your Applications folder.
 3. **Note:** Since this is an independent app, you may need to **Right-Click > Open** the first time to bypass macOS Gatekeeper.
 
@@ -24,4 +24,4 @@
 - **Distribution:** Portable .dmg
 
 ### 📄 License
-MIT License. Feel free to use and modify!
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. We believe in keeping software free and open for everyone. See the [LICENSE](LICENSE) file for details.
